@@ -42,8 +42,9 @@ Blockly.Rhai['forever'] = function(block) {
   var statements_stmts = Blockly.Rhai.statementToCode(block, 'STMTS');
   var code = statements_stmts;
   code = [
-    '( loop  ',
-    code + ')',
+    `//  Loop forever`,
+    `loop {`,
+    code + `}`,
   ].join('\n');
   return code;
 };
