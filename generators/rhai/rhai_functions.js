@@ -51,8 +51,9 @@ Blockly.Rhai['forever'] = function(block) {
 Blockly.Rhai['wait'] = function(block) {
   var number_duration = block.getFieldValue('DURATION');
   var code = [
-    '( delay ' + (number_duration * 1000) + ' )',
-    ''
+    `//  Wait ${number_duration} seconds`,
+    `time_delay(${number_duration * 1000});`,
+    ``
   ].join('\n');
   return code;
 };
@@ -61,9 +62,9 @@ Blockly.Rhai['digital_toggle_pin'] = function(block) {
   var dropdown_pin = block.getFieldValue('PIN');
   //  TODO: Call init_out only once,
   var code = [
-    '//  Toggle the GPIO pin',
-    'gpio::toggle(' + dropdown_pin + ') ? ;',
-    ''
+    `//  Toggle GPIO ${dropdown_pin}`,
+    `gpio::toggle(${dropdown_pin});`,
+    ``
   ].join('\n');
   return code;
 };
@@ -79,11 +80,14 @@ Blockly.Rhai['digital_read_pin'] = function(block) {
 Blockly.Rhai['digital_write_pin'] = function(block) {
   var dropdown_pin = block.getFieldValue('PIN');
   var dropdown_value = block.getFieldValue('VALUE');
-  //  TODO: Call init_out only once,
+  //  TODO: Call gpio::enable_output only once
   var code = [
-    '( pinmode ' + dropdown_pin + ' :output )',
-    '( digitalwrite ' + dropdown_pin + ' ' + dropdown_value + ' )',
-    ''
+    `//  Configure GPIO ${dropdown_pin} for Output`,
+    `gpio::enable_output(${dropdown_pin}, 0, 0);`,
+    ``,
+    `//  Set GPIO ${dropdown_pin} to ${dropdown_value == 0 ? 'Low' : 'High' }`,
+    `gpio::output_set(${dropdown_pin}, ${dropdown_value});`,
+    ``
   ].join('\n');  
   return code;
 };

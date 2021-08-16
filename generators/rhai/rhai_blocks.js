@@ -138,11 +138,11 @@ var rhai_blocks =
       "options": [
         [
           "LOW",
-          ":low"
+          "0"
         ],
         [
           "HIGH",
-          ":high"
+          "1"
         ]
       ]
     }

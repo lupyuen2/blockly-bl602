@@ -267,9 +267,9 @@
                         <mutation options="[&quot;text&quot;,&quot;text&quot;]"></mutation>
                         <field name="FIELDNAME">VALUE</field>
                         <field name="USER0">LOW</field>
-                        <field name="CPU0">:low</field>
+                        <field name="CPU0">0</field>
                         <field name="USER1">HIGH</field>
-                        <field name="CPU1">:high</field>
+                        <field name="CPU1">1</field>
                       </block>
                     </next>
                   </block>
