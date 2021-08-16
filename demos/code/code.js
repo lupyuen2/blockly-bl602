@@ -452,7 +452,6 @@ Code.init = function() {
 
   Code.loadBlocks('');
 
-  function TODO() {
   //// TODO: Added code here
   //  Load the Rhai Custom Blocks.
   var blocks = rhai_blocks;  // rhai_blocks defined in rhai_blocks.js
@@ -474,7 +473,6 @@ Code.init = function() {
     };    
   });
   ////
-  }
 
   if ('BlocklyStorage' in window) {
     // Hook a save function onto unload.
