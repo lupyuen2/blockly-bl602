@@ -4,16 +4,52 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" value="notranslate">
-  <title>Blockly Demo:</title>
+  <title>Blockly for BL602 / BL604</title>
+
+  <!--  Load Blockly Stylesheet and our override  -->
   <link rel="stylesheet" href="style.css">
   <script src="/storage.js"></script>
-  <script src="../../blockly_compressed.js"></script>
+
+  <!--  Load Blockly and Google Closure  -->
+  <script src="../../blockly_uncompressed.js"></script>
+
+  <!--  Load Blocks  -->
   <script src="../../blocks_compressed.js"></script>
+
+  <!-- Load Code Generators -->
   <script src="../../javascript_compressed.js"></script>
   <script src="../../python_compressed.js"></script>
   <script src="../../php_compressed.js"></script>
   <script src="../../lua_compressed.js"></script>
   <script src="../../dart_compressed.js"></script>
+
+  <!--  Load Rhai Code Generator  -->
+  <script src="../../generators/rhai.js"></script>
+
+  <!--  Load Rhai Blocks and Rhai Block Code Generators  -->
+  <!--
+  <script src="../../generators/rhai/rhai_blocks.js"></script>
+  <script src="../../generators/rhai/rhai_functions.js"></script>
+  <script src="../../generators/rhai/rhai_coap.js"></script>
+  <script src="../../generators/rhai/app_blocks.js"></script>
+  <script src="../../generators/rhai/app_code.js"></script>
+  <script src="../../generators/rhai/widgets_code.js"></script>
+  <script src="../../generators/rhai/widgets_blocks.js"></script>
+  <script src="../../generators/rhai/widgets_category.js"></script>
+  -->
+
+  <!--  Load Rhai Functions. TODO: Package into rhai_compressed.js  -->
+  <script src="../../generators/rhai/colour.js"></script>
+  <script src="../../generators/rhai/lists.js"></script>
+  <script src="../../generators/rhai/logic.js"></script>
+  <script src="../../generators/rhai/loops.js"></script>
+  <script src="../../generators/rhai/math.js"></script>
+  <script src="../../generators/rhai/procedures.js"></script>
+  <script src="../../generators/rhai/text.js"></script>
+  <script src="../../generators/rhai/variables.js"></script>  
+  <script src="../../generators/rhai/variables_dynamic.js"></script>
+  <!--  TODO: End  -->
+
   <script src="code.js"></script>
 </head>
 <body>
@@ -35,6 +71,8 @@
         <table width="100%">
           <tr id="tabRow" height="1em">
             <td id="tab_blocks" class="tabon">...</td>
+            <td class="tabmin tab_collapse">&nbsp;</td>
+            <td id="tab_rhai" class="taboff tab_collapse">Rhai</td>
             <td class="tabmin tab_collapse">&nbsp;</td>
             <td id="tab_javascript" class="taboff tab_collapse">JavaScript</td>
             <td class="tabmin tab_collapse">&nbsp;</td>
@@ -72,6 +110,7 @@
     </tr>
   </table>
   <div id="content_blocks" class="content"></div>
+  <pre id="content_rhai" class="content prettyprint lang-rhai"></pre>
   <pre id="content_javascript" class="content prettyprint lang-js"></pre>
   <pre id="content_python" class="content prettyprint lang-py"></pre>
   <pre id="content_php" class="content prettyprint lang-php"></pre>
@@ -80,16 +119,43 @@
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
-      <block type="controls_if"></block>
-      <block type="logic_compare"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-      <block type="logic_null"></block>
-      <block type="logic_ternary"></block>
+
+    <!--  Begin: Pins Category -->
+    <category name="GPIO" colour="330">
+      <block type="digital_read_pin"></block>
+      <block type="digital_write_pin"></block>
+      <block type="digital_toggle_pin"></block>
     </category>
+    <!--  End  -->
+
+    <!--  Begin: Widgets Category -->
+    <category name="I2C" colour="220">
+      <block type="app"></block>
+      <block type="label"></block>
+      <block type="button"></block>
+    </category>
+    <!--  End  -->
+
+    <!--  Begin: CoAP Category -->
+    <category name="SPI" colour="160">
+      <block type="coap"></block>
+      <block type="field"></block>
+    </category>
+    <!--  End: CoAP Category -->
+
+    <!--  Begin: Events Category -->
+    <category name="WiFi" colour="%{BKY_PROCEDURES_HUE}" custom="WIDGET"></category>
+    <!--  End  -->
+
+    <sep></sep>
     <category name="%{BKY_CATLOOPS}" colour="%{BKY_LOOPS_HUE}">
+
+      <!--  Begin: Forever and On Start -->      
+      <block type="on_start"></block>
+      <block type="forever"></block>
+      <block type="wait"></block>
+      <!--  End -->      
+
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -117,6 +183,15 @@
       </block>
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
+    </category>
+    <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+      <block type="logic_null"></block>
+      <block type="logic_ternary"></block>
     </category>
     <category name="%{BKY_CATMATH}" colour="%{BKY_MATH_HUE}">
       <block type="math_number">

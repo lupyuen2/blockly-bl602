@@ -234,14 +234,14 @@ Code.LANG = Code.getLang();
  * List of tab names.
  * @private
  */
-Code.TABS_ = ['blocks', 'javascript', 'php', 'python', 'dart', 'lua', 'xml'];
+Code.TABS_ = ['blocks', 'rhai', 'javascript', 'php', 'python', 'dart', 'lua', 'xml'];
 
 /**
  * List of tab names with casing, for display in the UI.
  * @private
  */
 Code.TABS_DISPLAY_ = [
-  'Blocks', 'JavaScript', 'PHP', 'Python', 'Dart', 'Lua', 'XML',
+  'Blocks', 'Rhai', 'JavaScript', 'PHP', 'Python', 'Dart', 'Lua', 'XML',
 ];
 
 Code.selected = 'blocks';
@@ -324,6 +324,8 @@ Code.renderContent = function() {
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     xmlTextarea.value = xmlText;
     xmlTextarea.focus();
+  } else if (content.id == 'content_rhai') {
+    Code.attemptCodeGeneration(Blockly.Rhai);
   } else if (content.id == 'content_javascript') {
     Code.attemptCodeGeneration(Blockly.JavaScript);
   } else if (content.id == 'content_python') {
@@ -449,6 +451,30 @@ Code.init = function() {
   Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
 
   Code.loadBlocks('');
+
+  function TODO() {
+  //// TODO: Added code here
+  //  Load the Rhai Custom Blocks.
+  var blocks = rhai_blocks;  // rhai_blocks defined in rhai_blocks.js
+  // For each Block...
+  blocks.forEach(block => {
+    // Register the Block with Blockly.
+    Blockly.Blocks[block.type] = {
+      init: function() {
+        this.jsonInit(block);
+        // Assign 'this' to a variable for use in the tooltip closure below.
+        var thisBlock = this;
+        /*
+        this.setTooltip(function() {
+          return 'Add a number to variable "%1".'.replace('%1',
+              thisBlock.getFieldValue('VAR'));
+        });
+        */
+      }
+    };    
+  });
+  ////
+  }
 
   if ('BlocklyStorage' in window) {
     // Hook a save function onto unload.
