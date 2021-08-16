@@ -124,12 +124,6 @@ Blockly.Rhai.init = function(workspace) {
  * @return {string} Completed code.
  */
 Blockly.Rhai.finish = function(code) {
-  // Indent every line.
-  if (code) {
-    code = this.prefixLines(code, this.INDENT);
-  }
-  code = 'main() {\n' + code + '}';
-
   // Convert the definitions dictionary into a list.
   var imports = [];
   var definitions = [];
