@@ -2,7 +2,7 @@
 
 Read the article...
 
--   ["Rust on RISC-V BL602: Simulated with WebAssembly"](https://lupyuen.github.io/articles/rustsim)
+-   ["Rust on RISC-V BL602: Rhai Scripting"](https://lupyuen.github.io/articles/rhai)
 
 Try it here (work in progress)...
 
