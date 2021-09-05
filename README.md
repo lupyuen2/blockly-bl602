@@ -8,8 +8,6 @@ Try it here (work in progress)...
 
 -   [Blockly for BL602 / BL604 and Rhai Script](https://lupyuen2.github.io/blockly-bl602/demos/code/)
 
-[Follow the updates in this Twitter Thread](https://twitter.com/MisterTechBlog/status/1427758328004759552)
-
 This Blockly program...
 
 > ![Blockly Program](https://lupyuen.github.io/images/rhai-blockly.png)
