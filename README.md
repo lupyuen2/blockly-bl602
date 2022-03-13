@@ -2,7 +2,21 @@
 
 Read the article...
 
--   ["Rust on RISC-V BL602: Simulated with WebAssembly"](https://lupyuen.github.io/articles/rustsim)
+-   ["Rust on RISC-V BL602: Rhai Scripting"](https://lupyuen.github.io/articles/rhai)
+
+Try it here (work in progress)...
+
+-   [Blockly for BL602 / BL604 and Rhai Script](https://lupyuen2.github.io/blockly-bl602/demos/code/)
+
+This Blockly program...
+
+> ![Blockly Program](https://lupyuen.github.io/images/rhai-blockly.png)
+
+Generates this (Rust-like) Rhai Script...
+
+> ![Generated Rhai Code](https://lupyuen.github.io/images/rhai-blockly2.png)
+
+Which shall be executed by the Rhai Scripting Engine for WebAssembly / BL602: https://github.com/lupyuen/bl602-simulator/tree/main/bl602-script
 
 # Blockly [![Build Status]( https://travis-ci.org/google/blockly.svg?branch=master)](https://travis-ci.org/google/blockly)
 
